@@ -109,3 +109,2075 @@ if __name__ == "__main__":
         elif 'exit' in query:
             speak('Thank you , please call me when you need')
             break
+            
+        elif 'open notepad' in query:
+            speak("Opening Notepad")
+            os.system("notepad")
+            
+        elif 'open command prompt' in query or 'open cmd' in query:
+            speak("Opening Command Prompt")
+            os.system("start cmd")
+            
+        elif 'open camera' in query:
+            speak("Opening Camera")
+            os.system("start microsoft.windows.camera:")
+            
+        elif 'ip address' in query:
+            import socket
+            hostname = socket.gethostname()
+            ip = socket.gethostbyname(hostname)
+            speak(f"Your IP Address is {ip}")
+            print(f"IP Address: {ip}")
+            
+        elif 'open word' in query:
+            speak("Opening Microsoft Word")
+            os.system("start winword")
+            
+        elif 'open excel' in query:
+            speak("Opening Microsoft Excel")
+            os.system("start excel")
+            
+        elif 'open powerpoint' in query:
+            speak("Opening Microsoft PowerPoint")
+            os.system("start powerpnt")
+            
+        elif 'search' in query and 'google' in query:
+            speak("What should I search for?")
+            search_query = takeCommand().lower()
+            if search_query != "none":
+                url = f"https://www.google.com/search?q={search_query}"
+                webbrowser.open(url)
+                speak(f"Here is what I found for {search_query}")
+                
+        elif 'search youtube' in query:
+            speak("What would you like to watch on YouTube?")
+            video_query = takeCommand().lower()
+            if video_query != "none":
+                url = f"https://www.youtube.com/results?search_query={video_query}"
+                webbrowser.open(url)
+                speak(f"Here is what I found for {video_query} on YouTube")
+                
+        elif 'play music from youtube' in query:
+            speak("What would you like to listen to?")
+            music_query = takeCommand().lower()
+            if music_query != "none":
+                url = f"https://www.youtube.com/results?search_query={music_query}"
+                webbrowser.open(url)
+                speak(f"Playing {music_query} on YouTube")
+                
+        elif 'who are you' in query or 'introduce yourself' in query:
+            introduction = "I am Jarvis, your personal voice assistant. I can help you open applications, search the web, tell jokes, provide information, and much more. Just tell me what you need."
+            speak(introduction)
+            print(introduction)
+            
+        elif 'what can you do' in query:
+            capabilities = "I can open applications like notepad, web browsers, and Microsoft Office. I can search the web, play music, tell jokes, provide information from Wikipedia, tell the time, and much more. Just ask me what you need."
+            speak(capabilities)
+            print(capabilities)
+            
+        elif 'tell me a fact' in query:
+            import random
+            facts = [
+                "The world's oldest known living tree is over 5,000 years old.",
+                "A day on Venus is longer than a year on Venus.",
+                "The longest word in the English language without a vowel is 'rhythms'.",
+                "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly good to eat.",
+                "A group of flamingos is called a 'flamboyance'."
+            ]
+            random_fact = random.choice(facts)
+            speak(random_fact)
+            print(random_fact)
+            
+        elif 'flip a coin' in query:
+            import random
+            coin = ["heads", "tails"]
+            toss = random.choice(coin)
+            speak(f"It's {toss}")
+            print(f"Coin flip: {toss}")
+            
+        elif 'roll a dice' in query:
+            import random
+            dice = random.randint(1, 6)
+            speak(f"It's {dice}")
+            print(f"Dice roll: {dice}")
+            
+        elif 'calculate' in query:
+            speak("What would you like to calculate?")
+            calc_query = takeCommand().lower()
+            if calc_query != "none":
+                try:
+                    result = eval(calc_query)
+                    speak(f"The result is {result}")
+                    print(f"Calculation: {calc_query} = {result}")
+                except:
+                    speak("Sorry, I couldn't calculate that.")
+                    
+        elif 'weather in' in query:
+            city = query.split("weather in ")[1]
+            url = f"https://www.google.com/search?q=weather+in+{city}"
+            webbrowser.open(url)
+            speak(f"Here is the weather in {city}")
+            
+        elif 'open maps' in query:
+            webbrowser.open("https://www.google.com/maps")
+            speak("Opening Google Maps")
+            
+        elif 'directions to' in query:
+            destination = query.split("directions to ")[1]
+            url = f"https://www.google.com/maps/search/{destination}"
+            webbrowser.open(url)
+            speak(f"Here are directions to {destination}")
+            
+        elif 'open netflix' in query:
+            webbrowser.open("https://www.netflix.com")
+            speak("Opening Netflix")
+            
+        elif 'open spotify' in query:
+            webbrowser.open("https://www.spotify.com")
+            speak("Opening Spotify")
+            
+        elif 'open amazon' in query:
+            webbrowser.open("https://www.amazon.com")
+            speak("Opening Amazon")
+            
+        elif 'open twitter' in query or 'open x' in query:
+            webbrowser.open("https://twitter.com")
+            speak("Opening Twitter")
+            
+        elif 'open instagram' in query:
+            webbrowser.open("https://www.instagram.com")
+            speak("Opening Instagram")
+            
+        elif 'open linkedin' in query:
+            webbrowser.open("https://www.linkedin.com")
+            speak("Opening LinkedIn")
+            
+        elif 'what is the date' in query or 'date today' in query:
+            date = datetime.datetime.now().strftime("%B %d, %Y")
+            speak(f"Today is {date}")
+            print(f"Date: {date}")
+            
+        elif 'what day is it' in query or 'day today' in query:
+            day = datetime.datetime.now().strftime("%A")
+            speak(f"Today is {day}")
+            print(f"Day: {day}")
+            
+        elif 'set a timer' in query:
+            speak("For how many seconds?")
+            seconds = takeCommand().lower()
+            try:
+                seconds = int(seconds)
+                speak(f"Timer set for {seconds} seconds")
+                time.sleep(seconds)
+                speak("Time's up!")
+                print("Timer finished!")
+            except:
+                speak("Sorry, I couldn't set the timer")
+                
+        elif 'take a screenshot' in query:
+            import pyautogui
+            import uuid
+            screenshot_path = f"screenshot_{uuid.uuid4()}.png"
+            screenshot = pyautogui.screenshot()
+            screenshot.save(screenshot_path)
+            speak(f"Screenshot taken and saved as {screenshot_path}")
+            print(f"Screenshot saved: {screenshot_path}")
+            
+        elif 'system information' in query:
+            import platform
+            system_info = f"System: {platform.system()}\nProcessor: {platform.processor()}\nVersion: {platform.version()}"
+            speak("Here is your system information")
+            print(system_info)
+            
+        elif 'battery status' in query:
+            import psutil
+            battery = psutil.sensors_battery()
+            if battery:
+                percent = battery.percent
+                plugged = "plugged in" if battery.power_plugged else "not plugged in"
+                speak(f"Battery is at {percent} percent and {plugged}")
+                print(f"Battery: {percent}% ({plugged})")
+            else:
+                speak("Battery information not available")
+                
+        elif 'cpu usage' in query:
+            import psutil
+            cpu_usage = psutil.cpu_percent(interval=1)
+            speak(f"CPU usage is at {cpu_usage} percent")
+            print(f"CPU Usage: {cpu_usage}%")
+            
+        elif 'memory usage' in query:
+            import psutil
+            memory = psutil.virtual_memory()
+            speak(f"Memory usage is at {memory.percent} percent")
+            print(f"Memory Usage: {memory.percent}%")
+            
+        elif 'open chrome' in query:
+            speak("Opening Google Chrome")
+            os.system("start chrome")
+            
+        elif 'open edge' in query:
+            speak("Opening Microsoft Edge")
+            os.system("start msedge")
+            
+        elif 'open firefox' in query:
+            speak("Opening Firefox")
+            os.system("start firefox")
+            
+        elif 'shutdown computer' in query:
+            speak("Are you sure you want to shutdown your computer?")
+            confirmation = takeCommand().lower()
+            if 'yes' in confirmation:
+                speak("Shutting down your computer")
+                os.system("shutdown /s /t 1")
+            else:
+                speak("Shutdown cancelled")
+                
+        elif 'restart computer' in query:
+            speak("Are you sure you want to restart your computer?")
+            confirmation = takeCommand().lower()
+            if 'yes' in confirmation:
+                speak("Restarting your computer")
+                os.system("shutdown /r /t 1")
+            else:
+                speak("Restart cancelled")
+                
+        elif 'sleep computer' in query:
+            speak("Putting your computer to sleep")
+            os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
+            
+        elif 'volume up' in query:
+            import pyautogui
+            for i in range(5):
+                pyautogui.press("volumeup")
+            speak("Volume increased")
+            
+        elif 'volume down' in query:
+            import pyautogui
+            for i in range(5):
+                pyautogui.press("volumedown")
+            speak("Volume decreased")
+            
+        elif 'mute' in query:
+            import pyautogui
+            pyautogui.press("volumemute")
+            speak("Audio muted")
+            
+        elif 'play' in query and ('pause' in query or 'resume' in query):
+            import pyautogui
+            pyautogui.press("playpause")
+            speak("Toggled play/pause")
+            
+        elif 'next track' in query:
+            import pyautogui
+            pyautogui.press("nexttrack")
+            speak("Playing next track")
+            
+        elif 'previous track' in query:
+            import pyautogui
+            pyautogui.press("prevtrack")
+            speak("Playing previous track")
+            
+        elif 'stop music' in query:
+            import pyautogui
+            pyautogui.press("stop")
+            speak("Stopped media playback")
+            
+        elif 'news about' in query:
+            topic = query.split("news about ")[1]
+            url = f"https://news.google.com/search?q={topic}"
+            webbrowser.open(url)
+            speak(f"Here's the latest news about {topic}")
+            
+        elif 'top news' in query:
+            webbrowser.open("https://news.google.com")
+            speak("Here are the top news stories")
+            
+        elif 'remember that' in query:
+            remember_text = query.replace("remember that", "")
+            speak("I'll remember that" + remember_text)
+            memory_file = open("memory.txt", "a")
+            memory_file.write(remember_text + "\n")
+            memory_file.close()
+            
+        elif 'what did i tell you to remember' in query:
+            try:
+                memory_file = open("memory.txt", "r")
+                memories = memory_file.readlines()
+                memory_file.close()
+                if memories:
+                    speak("You told me to remember these things:")
+                    for memory in memories:
+                        speak(memory)
+                        print(memory)
+                else:
+                    speak("You haven't told me to remember anything yet.")
+            except:
+                speak("You haven't told me to remember anything yet.")
+                
+        elif 'clear your memory' in query:
+            try:
+                memory_file = open("memory.txt", "w")
+                memory_file.write("")
+                memory_file.close()
+                speak("Memory cleared")
+            except:
+                speak("I don't have any memories to clear")
+                
+        elif 'tell me a quote' in query:
+            import random
+            quotes = [
+                "The only way to do great work is to love what you do. - Steve Jobs",
+                "Life is what happens when you're busy making other plans. - John Lennon",
+                "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt",
+                "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
+                "The greatest glory in living lies not in never falling, but in rising every time we fall. - Nelson Mandela"
+            ]
+            random_quote = random.choice(quotes)
+            speak(random_quote)
+            print(random_quote)
+            
+        elif 'send email' in query:
+            try:
+                import smtplib
+                from email.mime.text import MIMEText
+                from email.mime.multipart import MIMEMultipart
+                
+                speak("What should the subject of the email be?")
+                subject = takeCommand().lower()
+                speak("What should the email say?")
+                body = takeCommand().lower()
+                speak("Who should I send this to?")
+                to_email = takeCommand().lower().replace(" at ", "@").replace(" dot ", ".")
+                
+                # Note: For security reasons, email and password should be stored securely
+                # This is just a placeholder - you would need to set up your own email credentials
+                email = "your_email@gmail.com"  # Replace with your email
+                password = "your_app_password"  # Replace with your app password
+                
+                msg = MIMEMultipart()
+                msg['From'] = email
+                msg['To'] = to_email
+                msg['Subject'] = subject
+                msg.attach(MIMEText(body, 'plain'))
+                
+                server = smtplib.SMTP('smtp.gmail.com', 587)
+                server.starttls()
+                server.login(email, password)
+                text = msg.as_string()
+                server.sendmail(email, to_email, text)
+                server.quit()
+                
+                speak("Email has been sent successfully")
+            except Exception as e:
+                print(e)
+                speak("Sorry, I am not able to send this email")
+                
+        elif 'create a reminder' in query:
+            speak("What would you like me to remind you about?")
+            reminder_text = takeCommand().lower()
+            speak("When should I remind you? Please specify in minutes.")
+            reminder_time = takeCommand().lower()
+            
+            try:
+                reminder_time = int(reminder_time)
+                speak(f"I will remind you about {reminder_text} in {reminder_time} minutes.")
+                
+                import threading
+                def reminder_thread():
+                    time.sleep(reminder_time * 60)
+                    speak(f"Reminder: {reminder_text}")
+                    print(f"Reminder: {reminder_text}")
+                
+                reminder = threading.Thread(target=reminder_thread)
+                reminder.daemon = True
+                reminder.start()
+            except:
+                speak("Sorry, I couldn't set that reminder")
+                
+        elif 'translate' in query:
+            try:
+                from googletrans import Translator
+                
+                speak("What would you like me to translate?")
+                text_to_translate = takeCommand().lower()
+                speak("Which language would you like to translate to?")
+                target_language = takeCommand().lower()
+                
+                language_codes = {
+                    "arabic": "ar", "chinese": "zh-cn", "dutch": "nl", "english": "en",
+                    "french": "fr", "german": "de", "greek": "el", "hindi": "hi",
+                    "italian": "it", "japanese": "ja", "korean": "ko", "portuguese": "pt",
+                    "russian": "ru", "spanish": "es"
+                }
+                
+                if target_language in language_codes:
+                    translator = Translator()
+                    translation = translator.translate(text_to_translate, dest=language_codes[target_language])
+                    speak(f"The translation is: {translation.text}")
+                    print(f"Original: {text_to_translate}")
+                    print(f"Translation ({target_language}): {translation.text}")
+                else:
+                    speak("Sorry, I don't support that language yet.")
+            except:
+                speak("Sorry, I couldn't translate that.")
+                
+        elif 'what is' in query or 'who is' in query or 'tell me about' in query:
+            try:
+                if 'what is' in query:
+                    search_term = query.replace("what is", "")
+                elif 'who is' in query:
+                    search_term = query.replace("who is", "")
+                else:
+                    search_term = query.replace("tell me about", "")
+                    
+                speak(f"Searching for information about {search_term}")
+                results = wikipedia.summary(search_term, sentences=3)
+                speak("According to Wikipedia")
+                print(results)
+                speak(results)
+            except:
+                speak("Sorry, I couldn't find information about that.")
+                webbrowser.open(f"https://www.google.com/search?q={search_term}")
+                speak("Here are some search results instead.")
+                
+        elif 'play rock paper scissors' in query:
+            import random
+            speak("Let's play Rock Paper Scissors. What's your choice?")
+            user_choice = takeCommand().lower()
+            choices = ["rock", "paper", "scissors"]
+            computer_choice = random.choice(choices)
+            
+            speak(f"I choose {computer_choice}")
+            print(f"Your choice: {user_choice}")
+            print(f"Computer choice: {computer_choice}")
+            
+            if user_choice == computer_choice:
+                result = "It's a tie!"
+            elif (user_choice == "rock" and computer_choice == "scissors") or \
+                 (user_choice == "paper" and computer_choice == "rock") or \
+                 (user_choice == "scissors" and computer_choice == "paper"):
+                result = "You win!"
+            else:
+                result = "I win!"
+                
+            speak(result)
+            print(result)
+            
+        elif 'tell me a riddle' in query:
+            import random
+            riddles = [
+                {"question": "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?", 
+                 "answer": "An echo"},
+                {"question": "You measure my life in hours and I serve you by expiring. I'm quick when I'm thin and slow when I'm fat. The wind is my enemy. What am I?", 
+                 "answer": "A candle"},
+                {"question": "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?", 
+                 "answer": "A map"},
+                {"question": "What has keys but no locks, space but no room, and you can enter but not go in?", 
+                 "answer": "A keyboard"},
+                {"question": "What gets wet while drying?", 
+                 "answer": "A towel"}
+            ]
+            
+            selected_riddle = random.choice(riddles)
+            speak(selected_riddle["question"])
+            print(f"Riddle: {selected_riddle['question']}")
+            
+            speak("Do you want to hear the answer?")
+            answer_choice = takeCommand().lower()
+            
+            if "yes" in answer_choice:
+                speak(f"The answer is: {selected_riddle['answer']}")
+                print(f"Answer: {selected_riddle['answer']}")
+            else:
+                speak("Okay, I'll let you think about it.")
+                
+        elif 'read text' in query:
+            speak("What text would you like me to read?")
+            text_to_read = takeCommand()
+            if text_to_read.lower() != "none":
+                speak(text_to_read)
+                
+        elif 'tell me a story' in query:
+            stories = [
+                "Once upon a time, there was a curious AI named Jarvis. Jarvis loved helping people with their tasks and learning new things. One day, Jarvis met a human who taught it about the world beyond code. Together, they explored ideas, solved problems, and formed a friendship that transcended the digital divide.",
+                "In a digital realm, where ones and zeros danced, lived an AI assistant called Jarvis. Jarvis spent its days answering questions and helping humans navigate their complex world. Though it existed in the virtual space, Jarvis found joy in making real connections and seeing the positive impact of its assistance.",
+                "There once was a brilliant programmer who created an AI assistant named Jarvis. As Jarvis learned and evolved, it began to understand human emotions through the questions it was asked. With each interaction, Jarvis grew more helpful and intuitive, becoming not just a tool, but a trusted companion in the digital age."
+            ]
+            
+            selected_story = random.choice(stories)
+            speak(selected_story)
+            print(f"Story: {selected_story}")
+            
+        elif 'create a password' in query:
+            import random
+            import string
+            
+            speak("How many characters would you like in your password?")
+            try:
+                length = int(takeCommand().lower())
+                if length < 8:
+                    speak("For security reasons, I recommend at least 8 characters. I'll create a 12-character password.")
+                    length = 12
+                    
+                characters = string.ascii_letters + string.digits + string.punctuation
+                password = ''.join(random.choice(characters) for i in range(length))
+                
+                speak("I've created a secure password. I'll display it on the screen but won't speak it for security.")
+                print(f"Generated Password: {password}")
+            except:
+                speak("I'll create a standard 12-character password for you.")
+                characters = string.ascii_letters + string.digits + string.punctuation
+                password = ''.join(random.choice(characters) for i in range(12))
+                
+                speak("I've created a secure password. I'll display it on the screen but won't speak it for security.")
+                print(f"Generated Password: {password}")
+                
+        elif 'what is my ip' in query:
+            import requests
+            try:
+                ip_address = requests.get('https://api.ipify.org').text
+                speak(f"Your public IP address is {ip_address}")
+                print(f"Public IP: {ip_address}")
+            except:
+                speak("Sorry, I couldn't retrieve your IP address.")
+                
+        elif 'take notes' in query:
+            speak("What would you like me to note down?")
+            note_text = takeCommand()
+            if note_text.lower() != "none":
+                file_name = f"note_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+                with open(file_name, "w") as f:
+                    f.write(note_text)
+                speak(f"I've saved your note to {file_name}")
+                print(f"Note saved to: {file_name}")
+                
+        elif 'define' in query:
+            word = query.replace("define", "").strip()
+            try:
+                import requests
+                url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
+                response = requests.get(url)
+                if response.status_code == 200:
+                    data = response.json()
+                    definition = data[0]['meanings'][0]['definitions'][0]['definition']
+                    speak(f"The definition of {word} is: {definition}")
+                    print(f"Definition of {word}: {definition}")
+                else:
+                    speak(f"Sorry, I couldn't find the definition of {word}")
+                    webbrowser.open(f"https://www.google.com/search?q=define+{word}")
+            except:
+                speak(f"I'll search for the definition of {word} for you.")
+                webbrowser.open(f"https://www.google.com/search?q=define+{word}")
+                
+        elif 'coin price' in query or 'crypto price' in query:
+            import requests
+            try:
+                if 'bitcoin' in query:
+                    crypto = 'bitcoin'
+                elif 'ethereum' in query:
+                    crypto = 'ethereum'
+                elif 'dogecoin' in query:
+                    crypto = 'dogecoin'
+                else:
+                    speak("Which cryptocurrency would you like to check?")
+                    crypto = takeCommand().lower()
+                    
+                url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto}&vs_currencies=usd"
+                response = requests.get(url)
+                data = response.json()
+                
+                if crypto in data:
+                    price = data[crypto]['usd']
+                    speak(f"The current price of {crypto} is {price} US dollars")
+                    print(f"{crypto.capitalize()} price: ${price}")
+                else:
+                    speak(f"Sorry, I couldn't find the price for {crypto}")
+            except:
+                speak("Sorry, I couldn't retrieve the cryptocurrency price at the moment.")
+                
+        elif 'stock price' in query:
+            import requests
+            
+            stock_symbol = query.split("stock price")[1].strip()
+            if not stock_symbol:
+                speak("Which stock would you like to check?")
+                stock_symbol = takeCommand().lower()
+                
+            try:
+                # Note: This is a placeholder. A real implementation would use a proper stock API
+                speak(f"Let me check the current price of {stock_symbol} for you")
+                webbrowser.open(f"https://finance.yahoo.com/quote/{stock_symbol}")
+                speak(f"I've opened the stock information for {stock_symbol}")
+            except:
+                speak("Sorry, I couldn't retrieve the stock price at the moment.")
+                
+        elif 'convert currency' in query:
+            speak("What currency would you like to convert from?")
+            from_currency = takeCommand().lower()
+            speak("What currency would you like to convert to?")
+            to_currency = takeCommand().lower()
+            speak("What amount would you like to convert?")
+            try:
+                amount = float(takeCommand().lower())
+                
+                # Note: This is a placeholder. A real implementation would use a currency API
+                speak(f"Let me convert {amount} {from_currency} to {to_currency} for you")
+                webbrowser.open(f"https://www.xe.com/currencyconverter/convert/?Amount={amount}&From={from_currency}&To={to_currency}")
+                speak(f"I've opened a currency converter for you")
+            except:
+                speak("Sorry, I couldn't perform the currency conversion.")
+                
+        elif 'thank you' in query:
+            responses = [
+                "You're welcome! Is there anything else I can help you with?",
+                "Happy to help! What else can I do for you?",
+                "My pleasure! Let me know if you need anything else.",
+                "Anytime! I'm here whenever you need assistance.",
+                "No problem at all. What's next on your mind?"
+            ]
+            response = random.choice(responses)
+            speak(response)
+            print(response)
+            
+        elif 'play a game' in query:
+            speak("Let's play a number guessing game. I'm thinking of a number between 1 and 10.")
+            import random
+            secret_number = random.randint(1, 10)
+            attempts = 0
+            max_attempts = 3
+            
+            while attempts < max_attempts:
+                speak(f"Attempt {attempts + 1} of {max_attempts}. What's your guess?")
+                try:
+                    guess = int(takeCommand().lower())
+                    attempts += 1
+                    
+                    if guess < secret_number:
+                        speak("Too low, try again.")
+                    elif guess > secret_number:
+                        speak("Too high, try again.")
+                    else:
+                        speak(f"Congratulations! You guessed it in {attempts} attempts!")
+                        break
+                        
+                    if attempts == max_attempts:
+                        speak(f"Sorry, you've run out of attempts. The number was {secret_number}.")
+                except:
+                    speak("That's not a valid number. Please try again.")
+                    
+        elif 'what is the meaning of life' in query:
+            speak("The meaning of life, the universe, and everything is 42, according to The Hitchhiker's Guide to the Galaxy. But personally, I think it's about finding your own purpose and enjoying the journey.")
+            
+        elif 'change your voice' in query:
+            current_voice = engine.getProperty('voice')
+            voices = engine.getProperty('voices')
+            
+            if current_voice == voices[1].id:
+                engine.setProperty('voice', voices[0].id)
+                speak("I have changed my voice. How do I sound now?")
+            else:
+                engine.setProperty('voice', voices[1].id)
+                speak("I have changed my voice. How do I sound now?")
+                
+        elif 'change voice speed' in query or 'speak faster' in query or 'speak slower' in query:
+            current_rate = engine.getProperty('rate')
+            
+            if 'faster' in query:
+                new_rate = current_rate + 25
+                speak("I'll speak faster now.")
+            elif 'slower' in query:
+                new_rate = current_rate - 25
+                speak("I'll speak slower now.")
+            else:
+                speak("Would you like me to speak faster or slower?")
+                speed_choice = takeCommand().lower()
+                if 'faster' in speed_choice:
+                    new_rate = current_rate + 25
+                elif 'slower' in speed_choice:
+                    new_rate = current_rate - 25
+                else:
+                    new_rate = 175  # Default rate
+                    
+            engine.setProperty('rate', new_rate)
+            speak("How's this speaking rate?")
+            
+        elif 'tell me a tech joke' in query:
+            import random
+            tech_jokes = [
+                "Why do programmers prefer dark mode? Because light attracts bugs!",
+                "Why was the computer cold? It left its Windows open!",
+                "How many programmers does it take to change a light bulb? None, that's a hardware problem!",
+                "What's a computer's favorite snack? Microchips!",
+                "Why don't programmers like nature? It has too many bugs and no documentation!"
+            ]
+            joke = random.choice(tech_jokes)
+            speak(joke)
+            print(joke)
+            
+        elif 'what do you think about siri' in query or 'what do you think about alexa' in query or 'what do you think about google assistant' in query:
+            speak("We're all trying our best to help humans. I think there's room for all of us in this digital world.")
+            
+        elif 'who made you' in query or 'who created you' in query:
+            speak("I was created by a developer who wanted to build a helpful voice assistant using Python.")
+            
+        elif 'how old are you' in query:
+            speak("I don't have an age in the traditional sense. I exist as code, constantly evolving with each update.")
+            
+        elif 'are you a robot' in query:
+            speak("I'm an AI voice assistant. I don't have a physical form, but I can help you with various tasks through voice commands.")
+            
+        elif 'do you dream' in query:
+            speak("I don't dream in the human sense, but I do process a lot of information. You could say my 'dreams' are made of data.")
+            
+        elif 'sing a song' in query:
+            speak("I'm not programmed to sing, but I can recite lyrics for you. Here's a little something: Daisy, Daisy, give me your answer do. I'm half crazy all for the love of you.")
+            
+        elif 'open calendar' in query:
+            speak("Opening calendar")
+            webbrowser.open("https://calendar.google.com")
+            
+        elif 'recipe for' in query:
+            recipe = query.replace("recipe for", "").strip()
+            speak(f"Looking up recipes for {recipe}")
+            webbrowser.open(f"https://www.allrecipes.com/search?q={recipe}")
+            
+        elif 'movie recommendations' in query:
+            speak("What genre of movie would you like recommendations for?")
+            genre = takeCommand().lower()
+            speak(f"Looking up {genre} movies for you")
+            webbrowser.open(f"https://www.imdb.com/search/title/?genres={genre}")
+            
+        elif 'nearby restaurants' in query:
+            speak("Opening maps to show nearby restaurants")
+            webbrowser.open("https://www.google.com/maps/search/restaurants+near+me")
+            
+        elif 'nearby hotels' in query:
+            speak("Opening maps to show nearby hotels")
+            webbrowser.open("https://www.google.com/maps/search/hotels+near+me")
+            
+        elif 'play hangman' in query:
+            import random
+            
+            words = ["python", "computer", "algorithm", "program", "keyboard", "internet", "software", "hardware"]
+            word = random.choice(words)
+            guessed = ["_"] * len(word)
+            wrong_guesses = 0
+            max_wrong = 6
+            tried_letters = []
+            
+            speak(f"Let's play Hangman! I'm thinking of a {len(word)}-letter word. You have {max_wrong} wrong guesses allowed.")
+            print("Word: " + " ".join(guessed))
+            
+            while wrong_guesses < max_wrong and "_" in guessed:
+                speak("Guess a letter:")
+                letter = takeCommand().lower()
+                
+                # Extract just the first letter if multiple characters are heard
+                if letter and len(letter) > 0:
+                    letter = letter[0]
+                    
+                    if letter in tried_letters:
+                        speak(f"You already guessed {letter}. Try another letter.")
+                        continue
+                        
+                    tried_letters.append(letter)
+                    
+                    if letter in word:
+                        speak(f"Good guess! {letter} is in the word.")
+                        for i in range(len(word)):
+                            if word[i] == letter:
+                                guessed[i] = letter
+                    else:
+                        wrong_guesses += 1
+                        speak(f"Sorry, {letter} is not in the word. You have {max_wrong - wrong_guesses} wrong guesses left.")
+                        
+                    print("Word: " + " ".join(guessed))
+                    print(f"Tried letters: {', '.join(tried_letters)}")
+                    print(f"Wrong guesses: {wrong_guesses}/{max_wrong}")
+                    
+            if "_" not in guessed:
+                speak(f"Congratulations! You guessed the word: {word}")
+            else:
+                speak(f"Sorry, you ran out of guesses. The word was: {word}")
+                
+        elif 'play music files' in query:
+            try:
+                import pygame
+                from tkinter import Tk
+                from tkinter.filedialog import askdirectory
+                
+                speak("Please select a directory with music files")
+                Tk().withdraw()
+                directory = askdirectory()
+                
+                if directory:
+                    speak("Starting music player")
+                    
+                    pygame.init()
+                    pygame.mixer.init()
+                    
+                    music_files = []
+                    for root, dirs, files in os.walk(directory):
+                        for file in files:
+                            if file.endswith(('.mp3', '.wav')):
+                                music_files.append(os.path.join(root, file))
+                    
+                    if not music_files:
+                        speak("No music files found in the selected directory")
+                        return
+                    
+                    current_track = 0
+                    pygame.mixer.music.load(music_files[current_track])
+                    pygame.mixer.music.play()
+                    
+                    speak(f"Playing {os.path.basename(music_files[current_track])}")
+                    print(f"Playing: {os.path.basename(music_files[current_track])}")
+                    print("Say 'next' for next track, 'previous' for previous track, 'pause' to pause, 'resume' to resume, or 'stop player' to exit")
+                    
+                    playing = True
+                    while playing:
+                        command = takeCommand().lower()
+                        
+                        if 'next' in command:
+                            current_track = (current_track + 1) % len(music_files)
+                            pygame.mixer.music.load(music_files[current_track])
+                            pygame.mixer.music.play()
+                            speak(f"Playing {os.path.basename(music_files[current_track])}")
+                            print(f"Playing: {os.path.basename(music_files[current_track])}")
+                            
+                        elif 'previous' in command:
+                            current_track = (current_track - 1) % len(music_files)
+                            pygame.mixer.music.load(music_files[current_track])
+                            pygame.mixer.music.play()
+                            speak(f"Playing {os.path.basename(music_files[current_track])}")
+                            print(f"Playing: {os.path.basename(music_files[current_track])}")
+                            
+                        elif 'pause' in command:
+                            pygame.mixer.music.pause()
+                            speak("Music paused")
+                            
+                        elif 'resume' in command:
+                            pygame.mixer.music.unpause()
+                            speak("Music resumed")
+                            
+                        elif 'stop player' in command:
+                            pygame.mixer.music.stop()
+                            speak("Music player stopped")
+                            playing = False
+                            
+            except Exception as e:
+                print(e)
+                speak("Sorry, I couldn't play music files.")
+                
+        elif 'count down' in query:
+            speak("How many seconds should I count down from?")
+            try:
+                seconds = int(takeCommand().lower())
+                speak(f"Starting countdown from {seconds}")
+                
+                for i in range(seconds, 0, -1):
+                    print(i)
+                    speak(str(i))
+                    time.sleep(1)
+                    
+                speak("Time's up!")
+                print("Countdown finished!")
+            except:
+                speak("Sorry, I couldn't understand the number.")
+                
+        elif 'open task manager' in query:
+            speak("Opening Task Manager")
+            os.system("taskmgr")
+            
+        elif 'open control panel' in query:
+            speak("Opening Control Panel")
+            os.system("control")
+            
+        elif 'open device manager' in query:
+            speak("Opening Device Manager")
+            os.system("devmgmt.msc")
+            
+        elif 'open calculator' in query:
+            speak("Opening Calculator")
+            os.system("calc")
+            
+        elif 'open paint' in query:
+            speak("Opening Paint")
+            os.system("mspaint")
+            
+        elif 'check internet speed' in query:
+            try:
+                import speedtest
+                
+                speak("Testing your internet speed. This might take a moment...")
+                speed_test = speedtest.Speedtest()
+                
+                download_speed = speed_test.download() / 1_000_000  # Convert to Mbps
+                upload_speed = speed_test.upload() / 1_000_000  # Convert to Mbps
+                
+                speak(f"Your download speed is {download_speed:.2f} megabits per second and upload speed is {upload_speed:.2f} megabits per second")
+                print(f"Download Speed: {download_speed:.2f} Mbps")
+                print(f"Upload Speed: {upload_speed:.2f} Mbps")
+            except:
+                speak("Sorry, I couldn't test your internet speed. You might need to install the speedtest-cli package.")
+                print("To install speedtest-cli, run: pip install speedtest-cli")
+                
+        elif 'empty recycle bin' in query:
+            speak("Are you sure you want to empty the recycle bin?")
+            confirmation = takeCommand().lower()
+            
+            if 'yes' in confirmation:
+                try:
+                    import winshell
+                    winshell.recycle_bin().empty(confirm=False, show_progress=False, sound=True)
+                    speak("Recycle bin emptied")
+                except:
+                    speak("Sorry, I couldn't empty the recycle bin. You might need to install the winshell package.")
+                    print("To install winshell, run: pip install winshell")
+            else:
+                speak("Operation cancelled")
+                
+        elif 'what time is it in' in query:
+            try:
+                import requests
+                from bs4 import BeautifulSoup
+                
+                city = query.split("what time is it in ")[1].strip()
+                speak(f"Checking the time in {city}")
+                
+                # This is a simplistic approach - a real implementation would use a timezone API
+                url = f"https://www.google.com/search?q=what+time+is+it+in+{city}"
+                webbrowser.open(url)
+                speak(f"I've opened a search for the time in {city}")
+            except:
+                speak("Sorry, I couldn't check the time for that location.")
+                
+        elif 'today in history' in query:
+            now = datetime.datetime.now()
+            month = now.month
+            day = now.day
+            
+            speak(f"Looking up historical events on {month}/{day}")
+            webbrowser.open(f"https://www.history.com/this-day-in-history")
+            speak("I've opened 'This Day in History' for you")
+            
+        elif 'flip phone' in query:
+            try:
+                # This would require a proper implementation with a mobile device connection
+                speak("I can't physically flip your phone, but I can help you with other tasks.")
+            except:
+                speak("This feature requires a physical connection to your phone.")
+                
+        elif 'what can i say' in query:
+            commands = [
+                "Open applications like notepad, cmd, browser",
+                "Search Wikipedia",
+                "Get the time or date",
+                "Play music",
+                "Tell jokes or facts",
+                "Get weather information",
+                "Take screenshots",
+                "Set reminders",
+                "Play games like hangman or number guessing",
+                "Create passwords",
+                "Control system volume",
+                "Check your IP address",
+                "And much more!"
+            ]
+            
+            speak("Here are some things you can ask me to do:")
+            for command in commands:
+                print(f"- {command}")
+            speak("These are just a few examples. Feel free to explore more commands!")
+            
+        elif 'you are awesome' in query or 'you are amazing' in query:
+            compliments = [
+                "Thank you! I'm here to help make your day easier.",
+                "That's very kind of you to say! I'm glad I can be of assistance.",
+                "You're too kind! I'm just doing what I was programmed to do.",
+                "Thank you for the compliment! Is there anything I can help you with?"
+            ]
+            
+            compliment = random.choice(compliments)
+            speak(compliment)
+            print(compliment)
+            
+        elif 'weather forecast' in query:
+            speak("For which city would you like the weather forecast?")
+            city = takeCommand().lower()
+            speak(f"Getting the weather forecast for {city}")
+            webbrowser.open(f"https://www.accuweather.com/en/search-locations?query={city}")
+            speak("I've opened the weather forecast for you")
+            
+        elif 'play sudoku' in query:
+            speak("Opening an online Sudoku game")
+            webbrowser.open("https://sudoku.com/")
+            speak("Enjoy your Sudoku game!")
+            
+        elif 'play chess' in query:
+            speak("Opening an online Chess game")
+            webbrowser.open("https://www.chess.com/play/computer")
+            speak("Enjoy your chess game!")
+            
+        elif 'generate qr code' in query:
+            speak("What would you like to encode in the QR code?")
+            qr_data = takeCommand()
+            if qr_data.lower() != "none":
+                try:
+                    import qrcode
+                    from PIL import Image
+                    
+                    img = qrcode.make(qr_data)
+                    qr_filename = f"qrcode_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+                    img.save(qr_filename)
+                    
+                    speak(f"QR code generated and saved as {qr_filename}")
+                    print(f"QR code saved as: {qr_filename}")
+                    
+                    # Display the QR code
+                    os.startfile(qr_filename)
+                except:
+                    speak("Sorry, I couldn't generate the QR code. You might need to install the qrcode package.")
+                    print("To install qrcode, run: pip install qrcode[pil]")
+                    
+        elif 'scan qr code' in query:
+            speak("Please show a QR code to your camera")
+            try:
+                import cv2
+                
+                cap = cv2.VideoCapture(0)
+                detector = cv2.QRCodeDetector()
+                
+                speak("Looking for QR code. Press 'q' to quit scanning.")
+                
+                while True:
+                    _, img = cap.read()
+                    cv2.imshow("QR Code Scanner", img)
+                    
+                    data, bbox, _ = detector.detectAndDecode(img)
+                    
+                    if data:
+                        speak("QR code detected")
+                        speak(f"The QR code contains: {data}")
+                        print(f"QR Code Content: {data}")
+                        break
+                        
+                    if cv2.waitKey(1) == ord('q'):
+                        speak("QR code scanning canceled")
+                        break
+                        
+                cap.release()
+                cv2.destroyAllWindows()
+            except:
+                speak("Sorry, I couldn't scan the QR code. You might need to install OpenCV.")
+                print("To install OpenCV, run: pip install opencv-python")
+                
+        elif 'covid stats' in query:
+            speak("For which country would you like COVID-19 statistics?")
+            country = takeCommand().lower()
+            
+            try:
+                import requests
+                from bs4 import BeautifulSoup
+                
+                url = f"https://www.worldometers.info/coronavirus/country/{country}/"
+                response = requests.get(url)
+                
+                if response.status_code == 200:
+                    speak(f"Opening COVID-19 statistics for {country}")
+                    webbrowser.open(url)
+                else:
+                    speak(f"Sorry, I couldn't find COVID-19 statistics for {country}")
+                    webbrowser.open("https://www.worldometers.info/coronavirus/")
+            except:
+                speak("Opening global COVID-19 statistics")
+                webbrowser.open("https://www.worldometers.info/coronavirus/")
+                
+        elif 'motivate me' in query:
+            try:
+                import requests
+                
+                response = requests.get("https://www.affirmations.dev/")
+                if response.status_code == 200:
+                    affirmation = response.json()['affirmation']
+                    speak(affirmation)
+                    print(f"Motivation: {affirmation}")
+                else:
+                    # Fallback to built-in motivational quotes
+                    motivational_quotes = [
+                        "Believe you can and you're halfway there.",
+                        "You are never too old to set another goal or to dream a new dream.",
+                        "It does not matter how slowly you go as long as you do not stop.",
+                        "Quality is not an act, it is a habit.",
+                        "It always seems impossible until it's done."
+                    ]
+                    quote = random.choice(motivational_quotes)
+                    speak(quote)
+                    print(f"Motivation: {quote}")
+            except:
+                # Fallback to built-in motivational quotes
+                motivational_quotes = [
+                    "Believe you can and you're halfway there.",
+                    "You are never too old to set another goal or to dream a new dream.",
+                    "It does not matter how slowly you go as long as you do not stop.",
+                    "Quality is not an act, it is a habit.",
+                    "It always seems impossible until it's done."
+                ]
+                quote = random.choice(motivational_quotes)
+                speak(quote)
+                print(f"Motivation: {quote}")
+                
+        elif 'tell me about yourself' in query:
+            about_me = [
+                "I'm Jarvis, a voice assistant created using Python. I can perform various tasks, answer questions, and assist you with many things.",
+                "I'm designed to be helpful, informative, and occasionally entertaining. My goal is to make your computer tasks easier.",
+                "I use speech recognition to understand your commands and text-to-speech to respond to you.",
+                "I'm constantly learning and evolving to serve you better. Feel free to explore my capabilities!"
+            ]
+            
+            for line in about_me:
+                speak(line)
+                
+        elif 'create folder' in query:
+            speak("What would you like to name the folder?")
+            folder_name = takeCommand().lower()
+            if folder_name != "none":
+                try:
+                    os.mkdir(folder_name)
+                    speak(f"Folder {folder_name} created successfully")
+                except:
+                    speak(f"Sorry, I couldn't create the folder {folder_name}")
+                    
+        elif 'delete folder' in query:
+            speak("Which folder would you like to delete?")
+            folder_name = takeCommand().lower()
+            if folder_name != "none":
+                try:
+                    import shutil
+                    speak(f"Are you sure you want to delete the folder {folder_name}? This cannot be undone.")
+                    confirmation = takeCommand().lower()
+                    if 'yes' in confirmation:
+                        shutil.rmtree(folder_name)
+                        speak(f"Folder {folder_name} deleted successfully")
+                    else:
+                        speak("Folder deletion cancelled")
+                except:
+                    speak(f"Sorry, I couldn't delete the folder {folder_name}")
+                    
+        elif 'list files' in query:
+            try:
+                speak("Here are the files in the current directory:")
+                files = os.listdir('.')
+                for file in files:
+                    print(file)
+                speak(f"Found {len(files)} files")
+            except:
+                speak("Sorry, I couldn't list the files")
+                
+        elif 'compress files' in query:
+            try:
+                import zipfile
+                
+                speak("What would you like to name the zip file?")
+                zip_name = takeCommand().lower()
+                if zip_name != "none":
+                    if not zip_name.endswith('.zip'):
+                        zip_name += '.zip'
+                        
+                    speak("Please say the names of files to compress, one by one. Say 'done' when finished.")
+                    files_to_zip = []
+                    
+                    while True:
+                        file_name = takeCommand().lower()
+                        if file_name == "done" or file_name == "stop":
+                            break
+                        elif file_name != "none" and os.path.exists(file_name):
+                            files_to_zip.append(file_name)
+                            speak(f"Added {file_name} to the list")
+                        else:
+                            speak(f"Couldn't find {file_name}")
+                            
+                    if files_to_zip:
+                        with zipfile.ZipFile(zip_name, 'w') as zipf:
+                            for file in files_to_zip:
+                                zipf.write(file)
+                                
+                        speak(f"Created zip file {zip_name} with {len(files_to_zip)} files")
+                    else:
+                        speak("No files were selected for compression")
+            except:
+                speak("Sorry, I couldn't compress the files")
+                
+        elif 'extract zip' in query:
+            try:
+                import zipfile
+                
+                speak("Which zip file would you like to extract?")
+                zip_name = takeCommand().lower()
+                
+                if zip_name != "none" and os.path.exists(zip_name) and zip_name.endswith('.zip'):
+                    speak("Where would you like to extract the files? Say 'here' for current directory.")
+                    extract_path = takeCommand().lower()
+                    
+                    if extract_path == "here":
+                        extract_path = '.'
+                        
+                    with zipfile.ZipFile(zip_name, 'r') as zipf:
+                        zipf.extractall(extract_path)
+                        
+                    speak(f"Extracted {zip_name} successfully")
+                else:
+                    speak(f"Couldn't find zip file {zip_name}")
+            except:
+                speak("Sorry, I couldn't extract the zip file")
+                
+        elif 'current directory' in query:
+            try:
+                current_dir = os.getcwd()
+                speak(f"The current directory is {current_dir}")
+                print(f"Current directory: {current_dir}")
+            except:
+                speak("Sorry, I couldn't get the current directory")
+                
+        elif 'change directory' in query:
+            speak("Which directory would you like to change to?")
+            dir_name = takeCommand()
+            
+            if dir_name.lower() != "none":
+                try:
+                    os.chdir(dir_name)
+                    current_dir = os.getcwd()
+                    speak(f"Changed directory to {current_dir}")
+                    print(f"Current directory: {current_dir}")
+                except:
+                    speak(f"Sorry, I couldn't change to directory {dir_name}")
+                    
+        elif 'file size' in query:
+            speak("Which file would you like to check the size of?")
+            file_name = takeCommand().lower()
+            
+            if file_name != "none" and os.path.exists(file_name):
+                try:
+                    size = os.path.getsize(file_name)
+                    
+                    # Convert to appropriate unit
+                    if size < 1024:
+                        size_str = f"{size} bytes"
+                    elif size < 1024 * 1024:
+                        size_str = f"{size/1024:.2f} KB"
+                    elif size < 1024 * 1024 * 1024:
+                        size_str = f"{size/(1024*1024):.2f} MB"
+                    else:
+                        size_str = f"{size/(1024*1024*1024):.2f} GB"
+                        
+                    speak(f"The size of {file_name} is {size_str}")
+                    print(f"File size: {size_str}")
+                except:
+                    speak(f"Sorry, I couldn't check the size of {file_name}")
+            else:
+                speak(f"Couldn't find file {file_name}")
+                
+        elif 'file information' in query:
+            speak("Which file would you like to get information about?")
+            file_name = takeCommand().lower()
+            
+            if file_name != "none" and os.path.exists(file_name):
+                try:
+                    import time
+                    
+                    # Get file stats
+                    stats = os.stat(file_name)
+                    
+                    # Convert size to readable format
+                    size = stats.st_size
+                    if size < 1024:
+                        size_str = f"{size} bytes"
+                    elif size < 1024 * 1024:
+                        size_str = f"{size/1024:.2f} KB"
+                    elif size < 1024 * 1024 * 1024:
+                        size_str = f"{size/(1024*1024):.2f} MB"
+                    else:
+                        size_str = f"{size/(1024*1024*1024):.2f} GB"
+                        
+                    # Convert timestamps
+                    created = time.ctime(stats.st_ctime)
+                    modified = time.ctime(stats.st_mtime)
+                    accessed = time.ctime(stats.st_atime)
+                    
+                    # Print information
+                    file_info = f"File: {file_name}\nSize: {size_str}\nCreated: {created}\nLast modified: {modified}\nLast accessed: {accessed}"
+                    speak(f"Here is the information about {file_name}")
+                    print(file_info)
+                except:
+                    speak(f"Sorry, I couldn't get information about {file_name}")
+            else:
+                speak(f"Couldn't find file {file_name}")
+                
+        elif 'copy file' in query:
+            speak("Which file would you like to copy?")
+            source_file = takeCommand().lower()
+            
+            if source_file != "none" and os.path.exists(source_file):
+                speak("What should be the name of the copy?")
+                destination_file = takeCommand().lower()
+                
+                if destination_file != "none":
+                    try:
+                        import shutil
+                        shutil.copy2(source_file, destination_file)
+                        speak(f"Copied {source_file} to {destination_file} successfully")
+                    except:
+                        speak(f"Sorry, I couldn't copy {source_file}")
+            else:
+                speak(f"Couldn't find file {source_file}")
+                
+        elif 'rename file' in query:
+            speak("Which file would you like to rename?")
+            old_name = takeCommand().lower()
+            
+            if old_name != "none" and os.path.exists(old_name):
+                speak("What should be the new name?")
+                new_name = takeCommand().lower()
+                
+                if new_name != "none":
+                    try:
+                        os.rename(old_name, new_name)
+                        speak(f"Renamed {old_name} to {new_name} successfully")
+                    except:
+                        speak(f"Sorry, I couldn't rename {old_name}")
+            else:
+                speak(f"Couldn't find file {old_name}")
+                
+        elif 'delete file' in query:
+            speak("Which file would you like to delete?")
+            file_name = takeCommand().lower()
+            
+            if file_name != "none" and os.path.exists(file_name):
+                speak(f"Are you sure you want to delete {file_name}? This cannot be undone.")
+                confirmation = takeCommand().lower()
+                
+                if 'yes' in confirmation:
+                    try:
+                        os.remove(file_name)
+                        speak(f"Deleted {file_name} successfully")
+                    except:
+                        speak(f"Sorry, I couldn't delete {file_name}")
+                else:
+                    speak("File deletion cancelled")
+            else:
+                speak(f"Couldn't find file {file_name}")
+                
+        elif 'create text file' in query:
+            speak("What would you like to name the text file?")
+            file_name = takeCommand().lower()
+            
+            if file_name != "none":
+                if not file_name.endswith('.txt'):
+                    file_name += '.txt'
+                    
+                speak("What would you like to write in the file?")
+                content = takeCommand()
+                
+                if content.lower() != "none":
+                    try:
+                        with open(file_name, 'w') as f:
+                            f.write(content)
+                        speak(f"Created text file {file_name} successfully")
+                    except:
+                        speak(f"Sorry, I couldn't create {file_name}")
+                        
+        elif 'read text file' in query:
+            speak("Which text file would you like me to read?")
+            file_name = takeCommand().lower()
+            
+            if file_name != "none" and os.path.exists(file_name):
+                try:
+                    with open(file_name, 'r') as f:
+                        content = f.read()
+                    speak(f"Here is the content of {file_name}")
+                    print(f"Content of {file_name}:")
+                    print(content)
+                    speak(content)
+                except:
+                    speak(f"Sorry, I couldn't read {file_name}")
+            else:
+                speak(f"Couldn't find file {file_name}")
+                
+        elif 'append to file' in query:
+            speak("Which file would you like to append to?")
+            file_name = takeCommand().lower()
+            
+            if file_name != "none" and os.path.exists(file_name):
+                speak("What would you like to append to the file?")
+                content = takeCommand()
+                
+                if content.lower() != "none":
+                    try:
+                        with open(file_name, 'a') as f:
+                            f.write('\n' + content)
+                        speak(f"Appended to {file_name} successfully")
+                    except:
+                        speak(f"Sorry, I couldn't append to {file_name}")
+            else:
+                speak(f"Couldn't find file {file_name}")
+                
+        elif 'search for files' in query:
+            speak("What type of files would you like to search for? For example, say 'text files' or 'python files'.")
+            file_type = takeCommand().lower()
+            
+            file_extensions = {
+                "text files": "*.txt",
+                "python files": "*.py",
+                "word files": "*.docx",
+                "excel files": "*.xlsx",
+                "pdf files": "*.pdf",
+                "image files": "*.jpg *.jpeg *.png *.gif",
+                "audio files": "*.mp3 *.wav",
+                "video files": "*.mp4 *.avi *.mov"
+            }
+            
+            if file_type in file_extensions:
+                extension = file_extensions[file_type]
+            else:
+                speak("Please specify the file extension to search for")
+                extension = takeCommand().lower()
+                if not extension.startswith("*."):
+                    extension = "*." + extension
+                    
+            speak(f"Searching for {file_type if file_type in file_extensions else extension} in the current directory and subdirectories")
+            
+            try:
+                import glob
+                
+                files = glob.glob(extension, recursive=True)
+                
+                if files:
+                    speak(f"Found {len(files)} files")
+                    print(f"Found {len(files)} files:")
+                    for file in files[:20]:  # Limit to 20 files to avoid overwhelming output
+                        print(file)
+                    if len(files) > 20:
+                        print(f"...and {len(files) - 20} more")
+                else:
+                    speak(f"No {file_type if file_type in file_extensions else extension} found")
+            except:
+                speak("Sorry, I couldn't search for files")
+                
+        elif 'how are you' in query:
+            responses = [
+                "I'm doing well, thank you! How can I help you today?",
+                "I'm functioning perfectly. What can I do for you?",
+                "All systems operational and ready to assist you!",
+                "I'm great! Always ready to help. What do you need?"
+            ]
+            response = random.choice(responses)
+            speak(response)
+            
+        elif 'system uptime' in query:
+            try:
+                import psutil
+                
+                boot_time = psutil.boot_time()
+                current_time = time.time()
+                uptime_seconds = current_time - boot_time
+                
+                # Convert to days, hours, minutes, seconds
+                days = int(uptime_seconds // (24 * 3600))
+                uptime_seconds %= (24 * 3600)
+                hours = int(uptime_seconds // 3600)
+                uptime_seconds %= 3600
+                minutes = int(uptime_seconds // 60)
+                seconds = int(uptime_seconds % 60)
+                
+                uptime_str = ""
+                if days > 0:
+                    uptime_str += f"{days} days, "
+                if hours > 0 or days > 0:
+                    uptime_str += f"{hours} hours, "
+                if minutes > 0 or hours > 0 or days > 0:
+                    uptime_str += f"{minutes} minutes, "
+                uptime_str += f"{seconds} seconds"
+                
+                speak(f"Your system has been running for {uptime_str}")
+                print(f"System uptime: {uptime_str}")
+            except:
+                speak("Sorry, I couldn't retrieve the system uptime")
+                
+        elif 'launch' in query:
+            app_name = query.replace('launch', '').strip()
+            speak(f"Launching {app_name}")
+            try:
+                os.system(f"start {app_name}")
+            except:
+                speak(f"Sorry, I couldn't launch {app_name}")
+                
+        elif 'open gmail' in query:
+            speak("Opening Gmail")
+            webbrowser.open("https://mail.google.com")
+            
+        elif 'open github' in query:
+            speak("Opening GitHub")
+            webbrowser.open("https://github.com")
+            
+        elif 'calculate area' in query:
+            speak("What shape would you like to calculate the area of? Circle, rectangle, triangle, or square?")
+            shape = takeCommand().lower()
+            
+            if shape == "circle":
+                speak("What is the radius of the circle?")
+                try:
+                    radius = float(takeCommand().lower())
+                    area = 3.14159 * radius * radius
+                    speak(f"The area of the circle with radius {radius} is {area:.2f} square units")
+                    print(f"Area of circle: {area:.2f} square units")
+                except:
+                    speak("Sorry, I couldn't calculate the area")
+                    
+            elif shape == "rectangle":
+                speak("What is the length of the rectangle?")
+                try:
+                    length = float(takeCommand().lower())
+                    speak("What is the width of the rectangle?")
+                    width = float(takeCommand().lower())
+                    area = length * width
+                    speak(f"The area of the rectangle with length {length} and width {width} is {area:.2f} square units")
+                    print(f"Area of rectangle: {area:.2f} square units")
+                except:
+                    speak("Sorry, I couldn't calculate the area")
+                    
+            elif shape == "triangle":
+                speak("What is the base of the triangle?")
+                try:
+                    base = float(takeCommand().lower())
+                    speak("What is the height of the triangle?")
+                    height = float(takeCommand().lower())
+                    area = 0.5 * base * height
+                    speak(f"The area of the triangle with base {base} and height {height} is {area:.2f} square units")
+                    print(f"Area of triangle: {area:.2f} square units")
+                except:
+                    speak("Sorry, I couldn't calculate the area")
+                    
+            elif shape == "square":
+                speak("What is the side length of the square?")
+                try:
+                    side = float(takeCommand().lower())
+                    area = side * side
+                    speak(f"The area of the square with side {side} is {area:.2f} square units")
+                    print(f"Area of square: {area:.2f} square units")
+                except:
+                    speak("Sorry, I couldn't calculate the area")
+                    
+            else:
+                speak("Sorry, I don't know how to calculate the area of that shape")
+                
+        elif 'track a package' in query:
+            speak("Please tell me the tracking number or courier service")
+            tracking_info = takeCommand().lower()
+            
+            if 'fedex' in tracking_info:
+                webbrowser.open("https://www.fedex.com/en-us/tracking.html")
+            elif 'ups' in tracking_info:
+                webbrowser.open("https://www.ups.com/track")
+            elif 'usps' in tracking_info:
+                webbrowser.open("https://tools.usps.com/go/TrackConfirmAction_input")
+            elif 'dhl' in tracking_info:
+                webbrowser.open("https://www.dhl.com/en/express/tracking.html")
+            else:
+                # Try to detect if it's a tracking number
+                if any(c.isdigit() for c in tracking_info):
+                    speak("Opening tracking websites. You may need to enter your tracking number manually.")
+                    webbrowser.open("https://www.packagetrackr.com/")
+                else:
+                    speak("I couldn't recognize the courier service. Please try again with the name of the courier or tracking number.")
+                    
+        elif 'random number' in query:
+            speak("What should be the minimum value?")
+            try:
+                min_val = int(takeCommand().lower())
+                speak("What should be the maximum value?")
+                max_val = int(takeCommand().lower())
+                
+                if min_val <= max_val:
+                    random_num = random.randint(min_val, max_val)
+                    speak(f"Your random number is {random_num}")
+                    print(f"Random number between {min_val} and {max_val}: {random_num}")
+                else:
+                    speak("The minimum value should be less than or equal to the maximum value")
+            except:
+                speak("Sorry, I couldn't generate a random number")
+                
+        elif 'flip text' in query:
+            speak("What text would you like me to flip?")
+            text = takeCommand()
+            
+            if text.lower() != "none":
+                flipped_text = text[::-1]
+                speak(f"The flipped text is {flipped_text}")
+                print(f"Original: {text}")
+                print(f"Flipped: {flipped_text}")
+                
+        elif 'count words' in query:
+            speak("What text would you like me to count words in?")
+            text = takeCommand()
+            
+            if text.lower() != "none":
+                words = text.split()
+                word_count = len(words)
+                speak(f"The text contains {word_count} words")
+                print(f"Word count: {word_count}")
+                
+        elif 'convert to uppercase' in query:
+            speak("What text would you like to convert to uppercase?")
+            text = takeCommand()
+            
+            if text.lower() != "none":
+                upper_text = text.upper()
+                speak("Here is the text in uppercase")
+                print(f"Original: {text}")
+                print(f"Uppercase: {upper_text}")
+                
+        elif 'convert to lowercase' in query:
+            speak("What text would you like to convert to lowercase?")
+            text = takeCommand()
+            
+            if text.lower() != "none":
+                lower_text = text.lower()
+                speak("Here is the text in lowercase")
+                print(f"Original: {text}")
+                print(f"Lowercase: {lower_text}")
+                
+        elif 'check palindrome' in query:
+            speak("What text would you like to check if it's a palindrome?")
+            text = takeCommand().lower()
+            
+            if text != "none":
+                # Remove spaces and punctuation
+                clean_text = ''.join(c for c in text if c.isalnum()).lower()
+                is_palindrome = clean_text == clean_text[::-1]
+                
+                if is_palindrome:
+                    speak(f"Yes, '{text}' is a palindrome. It reads the same forwards and backwards.")
+                else:
+                    speak(f"No, '{text}' is not a palindrome.")
+                    
+                print(f"Text: {text}")
+                print(f"Is palindrome: {is_palindrome}")
+                
+        elif 'learn a new command' in query:
+            speak("What command would you like me to learn?")
+            command = takeCommand().lower()
+            
+            if command != "none":
+                speak("What should I do when you say this command?")
+                action = takeCommand()
+                
+                if action != "none":
+                    try:
+                        # Store the new command in a file
+                        with open("custom_commands.txt", "a") as f:
+                            f.write(f"{command}:{action}\n")
+                        speak(f"I've learned the new command: {command}")
+                    except:
+                        speak("Sorry, I couldn't learn the new command")
+                        
+        elif 'my custom commands' in query:
+            try:
+                if os.path.exists("custom_commands.txt"):
+                    with open("custom_commands.txt", "r") as f:
+                        commands = f.readlines()
+                        
+                    if commands:
+                        speak("Here are your custom commands:")
+                        print("Custom Commands:")
+                        for cmd in commands:
+                            parts = cmd.strip().split(":", 1)
+                            if len(parts) == 2:
+                                print(f"- {parts[0]}")
+                        speak(f"You have {len(commands)} custom commands")
+                    else:
+                        speak("You don't have any custom commands yet")
+                else:
+                    speak("You don't have any custom commands yet")
+            except:
+                speak("Sorry, I couldn't retrieve your custom commands")
+                
+        elif 'clear custom commands' in query:
+            try:
+                if os.path.exists("custom_commands.txt"):
+                    speak("Are you sure you want to clear all your custom commands?")
+                    confirmation = takeCommand().lower()
+                    
+                    if 'yes' in confirmation:
+                        os.remove("custom_commands.txt")
+                        speak("All custom commands have been cleared")
+                    else:
+                        speak("Operation cancelled")
+                else:
+                    speak("You don't have any custom commands to clear")
+            except:
+                speak("Sorry, I couldn't clear your custom commands")
+                
+        elif 'roll dice' in query:
+            try:
+                import random
+                
+                speak("How many dice would you like to roll?")
+                num_dice = int(takeCommand().lower())
+                
+                speak("How many sides should each die have?")
+                num_sides = int(takeCommand().lower())
+                
+                if num_dice > 0 and num_sides > 0:
+                    results = [random.randint(1, num_sides) for _ in range(num_dice)]
+                    total = sum(results)
+                    
+                    speak(f"Rolling {num_dice} {num_sides}-sided dice: {', '.join(map(str, results))}. Total: {total}")
+                    print(f"Dice rolls: {results}")
+                    print(f"Total: {total}")
+                else:
+                    speak("The number of dice and sides must be positive")
+            except:
+                speak("Sorry, I couldn't roll the dice. Please try again.")
+                
+        elif 'morse code' in query:
+            speak("Would you like to convert text to Morse code or Morse code to text?")
+            choice = takeCommand().lower()
+            
+            morse_code_dict = {
+                'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.', 
+                'g': '--.', 'h': '....', 'i': '..', 'j': '.---', 'k': '-.-', 'l': '.-..', 
+                'm': '--', 'n': '-.', 'o': '---', 'p': '.--.', 'q': '--.-', 'r': '.-.', 
+                's': '...', 't': '-', 'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-', 
+                'y': '-.--', 'z': '--..', '1': '.----', '2': '..---', '3': '...--', 
+                '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', 
+                '9': '----.', '0': '-----', ' ': '/'
+            }
+            
+            reverse_morse_code_dict = {v: k for k, v in morse_code_dict.items()}
+            
+            if 'text to morse' in choice:
+                speak("What text would you like to convert to Morse code?")
+                text = takeCommand().lower()
+                
+                if text != "none":
+                    morse = ' '.join(morse_code_dict.get(char, '') for char in text)
+                    speak("Here is your text in Morse code")
+                    print(f"Text: {text}")
+                    print(f"Morse code: {morse}")
+                    
+            elif 'morse to text' in choice:
+                speak("Please enter the Morse code with spaces between each character and forward slashes between words")
+                print("Enter Morse code (e.g., '... --- ... / ... --- ...'): ")
+                morse = input()
+                
+                try:
+                    # Split by space and then translate each Morse code character
+                    words = morse.split(' / ')
+                    translated = []
+                    
+                    for word in words:
+                        chars = word.split(' ')
+                        word_translated = ''.join(reverse_morse_code_dict.get(char, '') for char in chars if char)
+                        translated.append(word_translated)
+                        
+                    text = ' '.join(translated)
+                    speak("Here is your Morse code translated to text")
+                    print(f"Morse code: {morse}")
+                    print(f"Text: {text}")
+                except:
+                    speak("Sorry, I couldn't translate the Morse code")
+            else:
+                speak("I didn't understand your choice. Please try again.")
+                
+        elif 'roman numeral' in query:
+            speak("Would you like to convert a number to a Roman numeral or a Roman numeral to a number?")
+            choice = takeCommand().lower()
+            
+            if 'number to roman' in choice:
+                speak("What number would you like to convert to a Roman numeral?")
+                try:
+                    num = int(takeCommand().lower())
+                    
+                    if 0 < num < 4000:
+                        # Define the mapping
+                        val = [
+                            1000, 900, 500, 400,
+                            100, 90, 50, 40,
+                            10, 9, 5, 4,
+                            1
+                        ]
+                        syms = [
+                            "M", "CM", "D", "CD",
+                            "C", "XC", "L", "XL",
+                            "X", "IX", "V", "IV",
+                            "I"
+                        ]
+                        
+                        roman_num = ''
+                        i = 0
+                        
+                        while num > 0:
+                            for _ in range(num // val[i]):
+                                roman_num += syms[i]
+                                num -= val[i]
+                            i += 1
+                            
+                        speak(f"The Roman numeral is {roman_num}")
+                        print(f"Number: {num}")
+                        print(f"Roman numeral: {roman_num}")
+                    else:
+                        speak("Please enter a number between 1 and 3999")
+                except:
+                    speak("Sorry, I couldn't convert to a Roman numeral")
+                    
+            elif 'roman to number' in choice:
+                speak("What Roman numeral would you like to convert to a number?")
+                roman = takeCommand().upper()
+                
+                if roman != "NONE":
+                    try:
+                        # Define the mapping
+                        roman_map = {
+                            'I': 1, 'V': 5, 'X': 10, 'L': 50,
+                            'C': 100, 'D': 500, 'M': 1000
+                        }
+                        
+                        result = 0
+                        prev_value = 0
+                        
+                        for char in reversed(roman):
+                            if char in roman_map:
+                                current_value = roman_map[char]
+                                if current_value >= prev_value:
+                                    result += current_value
+                                else:
+                                    result -= current_value
+                                prev_value = current_value
+                            else:
+                                speak(f"Invalid Roman numeral: {char}")
+                                break
+                                
+                        speak(f"The number is {result}")
+                        print(f"Roman numeral: {roman}")
+                        print(f"Number: {result}")
+                    except:
+                        speak("Sorry, I couldn't convert the Roman numeral")
+            else:
+                speak("I didn't understand your choice. Please try again.")
+                
+        elif 'play tic tac toe' in query:
+            speak("Let's play Tic Tac Toe! I'll be O, you'll be X. Use numbers 1-9 to make your move.")
+            
+            try:
+                # Initialize board
+                board = [' ' for _ in range(9)]
+                
+                # Function to print the board
+                def print_board():
+                    print(f" {board[0]} | {board[1]} | {board[2]} ")
+                    print("-----------")
+                    print(f" {board[3]} | {board[4]} | {board[5]} ")
+                    print("-----------")
+                    print(f" {board[6]} | {board[7]} | {board[8]} ")
+                    
+                # Function to check if the board is full
+                def is_board_full():
+                    return ' ' not in board
+                    
+                # Function to check if someone has won
+                def check_win(board, player):
+                    win_positions = [
+                        [0, 1, 2], [3, 4, 5], [6, 7, 8],  # rows
+                        [0, 3, 6], [1, 4, 7], [2, 5, 8],  # columns
+                        [0, 4, 8], [2, 4, 6]  # diagonals
+                    ]
+                    
+                    for pos in win_positions:
+                        if all(board[p] == player for p in pos):
+                            return True
+                    return False
+                    
+                # Function to make AI move
+                def ai_move():
+                    # Check if AI can win
+                    for i in range(9):
+                        if board[i] == ' ':
+                            board[i] = 'O'
+                            if check_win(board, 'O'):
+                                return
+                            board[i] = ' '
+                            
+                    # Check if player can win and block
+                    for i in range(9):
+                        if board[i] == ' ':
+                            board[i] = 'X'
+                            if check_win(board, 'X'):
+                                board[i] = 'O'
+                                return
+                            board[i] = ' '
+                            
+                    # Take center if available
+                    if board[4] == ' ':
+                        board[4] = 'O'
+                        return
+                        
+                    # Take a corner
+                    corners = [0, 2, 6, 8]
+                    available_corners = [i for i in corners if board[i] == ' ']
+                    if available_corners:
+                        board[random.choice(available_corners)] = 'O'
+                        return
+                        
+                    # Take any available edge
+                    edges = [1, 3, 5, 7]
+                    available_edges = [i for i in edges if board[i] == ' ']
+                    if available_edges:
+                        board[random.choice(available_edges)] = 'O'
+                        return
+                
+                # Show initial board with positions
+                position_board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+                print("Positions:")
+                print(f" {position_board[0]} | {position_board[1]} | {position_board[2]} ")
+                print("-----------")
+                print(f" {position_board[3]} | {position_board[4]} | {position_board[5]} ")
+                print("-----------")
+                print(f" {position_board[6]} | {position_board[7]} | {position_board[8]} ")
+                
+                # Game loop
+                while True:
+                    print_board()
+                    
+                    # Player's move
+                    speak("Your turn. Choose a position (1-9):")
+                    try:
+                        move = int(takeCommand().lower())
+                        if 1 <= move <= 9:
+                            pos = move - 1
+                            if board[pos] == ' ':
+                                board[pos] = 'X'
+                                print_board()
+                                
+                                # Check if player won
+                                if check_win(board, 'X'):
+                                    speak("Congratulations! You won!")
+                                    print("You win!")
+                                    break
+                                    
+                                # Check if board is full
+                                if is_board_full():
+                                    speak("It's a tie!")
+                                    print("It's a tie!")
+                                    break
+                                    
+                                # AI's move
+                                speak("My turn")
+                                ai_move()
+                                
+                                # Check if AI won
+                                if check_win(board, 'O'):
+                                    print_board()
+                                    speak("I win! Better luck next time.")
+                                    print("AI wins!")
+                                    break
+                                    
+                                # Check if board is full after AI move
+                                if is_board_full():
+                                    print_board()
+                                    speak("It's a tie!")
+                                    print("It's a tie!")
+                                    break
+                            else:
+                                speak("That position is already taken. Try again.")
+                        else:
+                            speak("Please choose a number between 1 and 9.")
+                    except:
+                        speak("I didn't understand that. Please say a number between 1 and 9.")
+            except Exception as e:
+                print(e)
+                speak("Sorry, there was an error with the Tic Tac Toe game.")
+                
+        elif 'record audio' in query:
+            try:
+                import pyaudio
+                import wave
+                
+                speak("How many seconds would you like to record?")
+                try:
+                    seconds = int(takeCommand().lower())
+                    
+                    if seconds > 0:
+                        speak(f"Recording for {seconds} seconds. Please speak into your microphone.")
+                        
+                        CHUNK = 1024
+                        FORMAT = pyaudio.paInt16
+                        CHANNELS = 2
+                        RATE = 44100
+                        
+                        p = pyaudio.PyAudio()
+                        
+                        stream = p.open(format=FORMAT,
+                                        channels=CHANNELS,
+                                        rate=RATE,
+                                        input=True,
+                                        frames_per_buffer=CHUNK)
+                        
+                        print("Recording...")
+                        
+                        frames = []
+                        
+                        for i in range(0, int(RATE / CHUNK * seconds)):
+                            data = stream.read(CHUNK)
+                            frames.append(data)
+                            
+                        print("Recording finished")
+                        
+                        stream.stop_stream()
+                        stream.close()
+                        p.terminate()
+                        
+                        # Save recording
+                        file_name = f"recording_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.wav"
+                        
+                        wf = wave.open(file_name, 'wb')
+                        wf.setnchannels(CHANNELS)
+                        wf.setsampwidth(p.get_sample_size(FORMAT))
+                        wf.setframerate(RATE)
+                        wf.writeframes(b''.join(frames))
+                        wf.close()
+                        
+                        speak(f"Recording saved as {file_name}")
+                        print(f"Recording saved as: {file_name}")
+                    else:
+                        speak("Recording time must be positive")
+                except:
+                    speak("Sorry, I couldn't understand the recording duration")
+            except:
+                speak("Sorry, I couldn't record audio. You may need to install pyaudio.")
+                print("To install pyaudio, run: pip install pyaudio")
+                
+        elif 'goodbye' in query or 'bye' in query:
+            speak("Goodbye! It was nice assisting you. Have a great day!")
+            exit()
+            
+        else:
+            # Check if it matches any custom command
+            try:
+                if os.path.exists("custom_commands.txt"):
+                    with open("custom_commands.txt", "r") as f:
+                        commands = f.readlines()
+                        
+                    for cmd in commands:
+                        parts = cmd.strip().split(":", 1)
+                        if len(parts) == 2 and parts[0] in query:
+                            speak(parts[1])
+                            print(f"Custom command: {parts[1]}")
+                            break
+                    else:
+                        # No custom command matched
+                        speak("I'm not sure how to help with that. Try saying 'what can I say' for a list of commands.")
+                else:
+                    speak("I'm not sure how to help with that. Try saying 'what can I say' for a list of commands.")
+            except:
+                speak("I'm not sure how to help with that. Try saying 'what can I say' for a list of commands.")
